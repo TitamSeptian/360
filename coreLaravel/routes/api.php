@@ -16,3 +16,12 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/data-tourism', function ()
+{
+  return view('data.data-tourism');
+});
+Route::get('/data-gallery', function ()
+{
+  return view('data.data-gallery');
+});
