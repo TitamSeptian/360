@@ -14,6 +14,15 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        $role = Role::where('name', 'user')->firstOrFail();
+        $user = [
+            'name' => 'Normal User',
+            'email' => 'user@user.com',
+            'password' => bcrypt('password'),
+            'remember_token' => Str::random(60),
+            'role_id' => $role->id
+        ];
+
         if (User::count() == 0) {
             $role = Role::where('name', 'admin')->firstOrFail();
 
@@ -25,5 +34,6 @@ class UsersTableSeeder extends Seeder
                 'role_id'        => $role->id,
             ]);
         }
+        User::create($user);
     }
 }
