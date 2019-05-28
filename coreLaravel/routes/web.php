@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,4 +35,16 @@ Route::get('/tourism/category/{slug}', 'TourismControl@category');
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 
+<<<<<<< HEAD
+=======
+    // destinations for CRUD admin
+    Route::get('destination/create', 'DestinationController@create')->name('voyager.destinations.create');
+    Route::post('destination/create', 'DestinationController@store')->name('voyager.destinations.store');
+    Route::get('destination/{destination}/edit', 'DestinationController@edit')->name('voyager.destinations.edit');
+    Route::put('destination/{destination}/edit', 'DestinationController@update')->name('voyager.destinations.update');
+>>>>>>> posting
 });
+
+// Route::get('logout', function () {
+//     Auth::logout();
+// });
