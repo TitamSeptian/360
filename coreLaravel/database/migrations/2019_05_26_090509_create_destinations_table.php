@@ -17,10 +17,13 @@ class CreateDestinationsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->foreign('category_id')->references('id')->on('categories');
+            $table->unsignedBigInteger('location_id')->nullable();
+            $table->foreign('location_id')->references('id')->on('locations');
             $table->string('slug')->unique();
             $table->string('name');
             $table->text('description');
-            $table->string('address');
             $table->string('images')->nullable();
             $table->float('rating')->nullable();
             $table->enum('status', ['disetujui', 'belum disetujui'])->default('belum disetujui');
