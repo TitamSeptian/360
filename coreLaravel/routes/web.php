@@ -33,4 +33,5 @@ Route::get('/tourism/category/{slug}', 'TourismControl@category');
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
+
 });
