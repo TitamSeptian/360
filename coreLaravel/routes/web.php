@@ -35,11 +35,19 @@ Route::get('/tourism/category/{slug}', 'TourismControl@category');
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 
-    // destinations for CRUD admin
-    Route::get('destination/create', 'DestinationController@create')->name('voyager.destinations.create');
-    Route::post('destination/create', 'DestinationController@store')->name('voyager.destinations.store');
-    Route::get('destination/{destination}/edit', 'DestinationController@edit')->name('voyager.destinations.edit');
-    Route::put('destination/{destination}/edit', 'DestinationController@update')->name('voyager.destinations.update');
+    // destinations for CRUD users
+    // Route::get('destination/create', 'DestinationController@create')->name('voyager.destinations.create');
+    // Route::post('destination/create', 'DestinationController@store')->name('voyager.destinations.store');
+    // Route::get('destination/{destination}/edit', 'DestinationController@edit')->name('voyager.destinations.edit');
+    // Route::put('destination/{destination}/edit', 'DestinationController@update')->name('voyager.destinations.update');
+
+    // destinations display admin
+    Route::get('destinations/accepted', 'Admin\DestinationController@indexDesAcc')->name('destination.accepted');
+    Route::get('getdata/accepted', 'Admin\DestinationController@acceptDatatables')->name('getdata.detination.accepted');
+    Route::get('destinations/pending', 'Admin\DestinationController@indexDesPend')->name('destination.pending');
+    Route::get('getdata/pending', 'Admin\DestinationController@pendingDatatables')->name('getdata.detination.pending');
+    Route::get('destination/detail/{id}', 'Admin\DestinationController@detailPending')->name('destination.pending.detail');
+    Route::put('destinations/{id}/edit', 'Admin\DestinationController@update')->name('destination.pending.update');
 });
 
 // Route::get('logout', function () {

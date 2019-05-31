@@ -14,9 +14,7 @@ class User extends \TCG\Voyager\Models\User
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    protected $guarded = ['id'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -26,4 +24,9 @@ class User extends \TCG\Voyager\Models\User
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function destination()
+    {
+        return $this->hasMany('App\Destination');
+    }
 }

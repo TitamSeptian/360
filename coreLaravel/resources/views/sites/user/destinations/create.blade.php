@@ -60,14 +60,16 @@
                                    </div> --}}
 
                                    <div class="form-group">
-                                        <label for="images">Gambar</label>
-                                        <input id="images" class="form-control-file @error('name') is-invalid @enderror" type="file" name="images">
+                                        <label for="images">Gambar</label><br>
+                                        <img src="{{ asset('img/images/camera_360.png') }}" width="650px" height="520px" style="margin-bottom:8px;" id="images-field">
+                                        <input id="images" class="form-control-file @error('name') is-invalid @enderror" type="file" name="images" onchange="preview(event)">
                                         @error('images')
                                              <span class="invalid-feedback" role="alert">
                                                   <strong>{{ $message }}</strong>
                                              </span>
                                         @enderror
                                    </div>
+
 
                                    <div class="form-group">
                                         <label class="control-label" for="richtextdescription">Keterangan</label>
@@ -89,3 +91,7 @@
           </div>
      </div>
 @endsection
+
+@push('javascript')
+     <script src="{{ asset('js/custom.js') }}"></script>
+@endpush

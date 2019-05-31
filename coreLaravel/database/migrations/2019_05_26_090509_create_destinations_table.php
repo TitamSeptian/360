@@ -25,7 +25,7 @@ class CreateDestinationsTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->string('images')->nullable();
-            $table->float('rating')->nullable();
+            $table->float('rating')->default(0);
             $table->enum('status', ['disetujui', 'belum disetujui'])->default('belum disetujui');
             $table->timestamps();
         });

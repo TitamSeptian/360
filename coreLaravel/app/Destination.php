@@ -17,4 +17,9 @@ class Destination extends Model
     {
         return $this->belongsTo('App\Location');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

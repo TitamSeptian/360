@@ -14,7 +14,7 @@ class DestinationController extends Controller
     {
         $categories = Category::all();
         $locations = Location::all();
-        return view('sites.admin.destinations.create', ['categories' => $categories, 'locations' => $locations]);
+        return view('sites.user.destinations.create', ['categories' => $categories, 'locations' => $locations]);
     }
 
     public function store(Request $request)
@@ -49,7 +49,7 @@ class DestinationController extends Controller
         $categories = Category::all();
         $destinations = Destination::findOrFail($destination);
 
-        return view('sites.admin.destinations.edit', ['locations' => $locations, 'categories' => $categories, 'destinations' => $destinations]);
+        return view('sites.user.destinations.edit', ['locations' => $locations, 'categories' => $categories, 'destinations' => $destinations]);
     }
 
     public function update(Request $request, $destination)
