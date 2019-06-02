@@ -1,9 +1,5 @@
 @extends('voyager::master')
 
-@section('css')
-     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-@endsection
-
 @section('content')
      <div class="container mt-5">
           <div class="row">
@@ -49,16 +45,6 @@
                                         @enderror
                                    </div>
 
-                                   {{-- <div class="form-group">
-                                        <label for="location_id">Lokasi</label>
-                                        <input id="location_id" class="form-control @error('location_id') is-invalid @enderror" type="text" name="location_id">
-                                        @error('location_id')
-                                             <span class="invalid-feedback" role="alert">
-                                                  <strong>{{ $message }}</strong>
-                                             </span>
-                                        @enderror
-                                   </div> --}}
-
                                    <div class="form-group">
                                         <label for="images">Gambar</label><br>
                                         <img src="{{ asset('img/images/camera_360.png') }}" width="650px" height="520px" style="margin-bottom:8px;" id="images-field">
@@ -93,5 +79,17 @@
 @endsection
 
 @push('javascript')
-     <script src="{{ asset('js/custom.js') }}"></script>
+     <script>
+          function preview(event) {
+          let reader = new FileReader();
+          let imageField = document.querySelector('#images-field');
+
+          reader.onload = function () {
+               if (reader.readyState === 2) {
+                    imageField.src = reader.result;
+               }
+          }
+          reader.readAsDataURL(event.target.files[0]);
+          }
+     </script>
 @endpush

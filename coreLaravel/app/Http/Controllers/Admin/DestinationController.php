@@ -68,7 +68,7 @@ class DestinationController extends Controller
                 if ($destinations->images == null) {
                     return 'Tidak Ada Foto';
                 }
-                return '<img width="180" height="180" src="' . asset('storage/' . $destinations->photo) . '" alt="">';
+                return '<img width="180px" height="180px" src="' . asset('coreLaravel/public/storage/' . $destinations->images) . '" alt="">';
             })
             ->addColumn('action', function ($destinations) {
                 return view('layouts.partials.actions.action_destination', [
@@ -102,7 +102,7 @@ class DestinationController extends Controller
                 if ($destinations->images == null) {
                     return 'Tidak Ada Foto';
                 }
-                return '<img width="180" height="180" src="' . asset('storage/' . $destinations->photo) . '" alt="">';
+                return '<img width="180px" height="180px" src="' . asset('coreLaravel/public/storage/' . $destinations->images) . '" alt="">';
             })
             ->addColumn('action', function ($destinations) {
                 return view('layouts.partials.actions.action_destination', [

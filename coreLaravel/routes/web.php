@@ -49,7 +49,3 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('destination/detail/{id}', 'Admin\DestinationController@detailPending')->name('destination.pending.detail');
     Route::put('destinations/{id}/edit', 'Admin\DestinationController@update')->name('destination.pending.update');
 });
-
-// Route::get('logout', function () {
-//     Auth::logout();
-// });

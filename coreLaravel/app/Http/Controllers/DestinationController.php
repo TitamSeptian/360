@@ -19,16 +19,16 @@ class DestinationController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'category_id' => 'required',
-            'description' => 'required',
-            'address' => 'required',
-            'images' => 'required',
-        ]);
+        // $this->validate($request, [
+        //     'name' => 'required',
+        //     'category_id' => 'required',
+        //     'description' => 'required',
+        //     'address' => 'required',
+        //     'images' => 'required',
+        // ]);
 
         // catch request images
-        $images = $request->file('images')->store('destinations');
+        $images = $request->file('images')->store('destinations/' . str_replace(' ', '-', $request->name));
 
         Destination::create([
             'user_id' => auth()->user()->id,
@@ -60,7 +60,7 @@ class DestinationController extends Controller
 
         if ($request->hasFile('images')) {
             if ($destinations->images != null) {
-                unlink(public_path('storage/' . $destinations->images));
+                unlink(public_path('storage/' . str_replace('-', ' ', $request->name) . $destinations->images));
             }
             $images = $request->file('images')->store('destinations');
         }

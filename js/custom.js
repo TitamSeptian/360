@@ -496,15 +496,3 @@
 	// 	}
 	// 	dots[slideIndex-1].className += " active";
 	// }
-
-	function preview(event) {
-		let reader = new FileReader();
-		let imageField = document.querySelector('#images-field');
-
-		reader.onload = function () {
-			if (reader.readyState === 2) {
-				imageField.src = reader.result;
-			}
-		}
-		reader.readAsDataURL(event.target.files[0]);
-	}
