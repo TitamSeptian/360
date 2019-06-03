@@ -62,7 +62,6 @@
                                                   <div class="picture" id="panorama">
                                                        
                                                   </div>
-                                                  {{-- <img src="{{ asset('coreLaravel/public/storage/' . $destination->images) }}" width="100%" height="600px" id="panorama" alt=""> --}}
                                              </div>
                                         </div>
                                    </div>

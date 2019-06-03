@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Destination;
 use App\Location;
+use App\Http\Requests\DestinationValidate;
 use Illuminate\Support\Facades\Storage;
 
 class DestinationController extends Controller
@@ -17,16 +18,8 @@ class DestinationController extends Controller
         return view('sites.user.destinations.create', ['categories' => $categories, 'locations' => $locations]);
     }
 
-    public function store(Request $request)
+    public function store(DestinationValidate $request)
     {
-        // $this->validate($request, [
-        //     'name' => 'required',
-        //     'category_id' => 'required',
-        //     'description' => 'required',
-        //     'address' => 'required',
-        //     'images' => 'required',
-        // ]);
-
         // catch request images
         $images = $request->file('images')->store('destinations/' . str_replace(' ', '-', $request->name));
 
@@ -39,7 +32,6 @@ class DestinationController extends Controller
             'location_id' => $request->location_id,
             'images' => $images
         ]);
-
         return redirect('/admin/destinations');
     }
 
@@ -52,17 +44,18 @@ class DestinationController extends Controller
         return view('sites.user.destinations.edit', ['locations' => $locations, 'categories' => $categories, 'destinations' => $destinations]);
     }
 
-    public function update(Request $request, $destination)
+    public function update(DestinationValidate $request, $destination)
     {
+
         $destinations = Destination::findOrFail($destination);
 
-        $images = $destinations->images;
-
-        if ($request->hasFile('images')) {
+        if ($request->images) {
             if ($destinations->images != null) {
-                unlink(public_path('storage/' . str_replace('-', ' ', $request->name) . $destinations->images));
+                unlink(public_path('storage/' . $destinations->images));
             }
-            $images = $request->file('images')->store('destinations');
+            $images = $request->file('images')->store('destinations/' . str_replace('-', ' ', $request->name));
+        } else {
+            $images = $destinations->images;
         }
 
         $destinations->update([
@@ -73,5 +66,21 @@ class DestinationController extends Controller
             'location_id' => $request->location_id,
             'images' => $images
         ]);
+
+        return redirect('/admin/destinations');
+    }
+
+    public function delete($destination)
+    {
+        $data = Destination::findOrFail($destination);
+
+        if ($data->images != null) {
+            unlink(public_path('storage/' . $data->images));
+            $data->delete();
+        }
+
+        $data->delete();
+
+        return redirect('/admin/destinations');
     }
 }

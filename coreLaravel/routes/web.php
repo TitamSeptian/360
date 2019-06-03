@@ -40,6 +40,7 @@ Route::group(['prefix' => 'admin'], function () {
     // Route::post('destination/create', 'DestinationController@store')->name('voyager.destinations.store');
     // Route::get('destination/{destination}/edit', 'DestinationController@edit')->name('voyager.destinations.edit');
     // Route::put('destination/{destination}/edit', 'DestinationController@update')->name('voyager.destinations.update');
+    // Route::post('destination/{destination}', 'DestinationController@delete')->name('voyager.destinations.delete');
 
     // destinations display admin
     Route::get('destinations/accepted', 'Admin\DestinationController@indexDesAcc')->name('destination.accepted');

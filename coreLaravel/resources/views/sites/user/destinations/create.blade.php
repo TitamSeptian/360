@@ -1,5 +1,21 @@
 @extends('voyager::master')
 
+@section('css')
+     <style>
+          #panorama{
+               width: 100%;
+               height: 500px;
+          }
+          .is-invalid{
+               border: 1px solid #e21b1b;
+          }
+          .invalid-feedback{
+               color: #e21b1b;
+          }
+     </style>
+     <link rel="stylesheet" href="{{ asset('css/pannellum.min.css') }}">
+@endsection
+
 @section('content')
      <div class="container mt-5">
           <div class="row">
@@ -22,12 +38,17 @@
 
                                    <div class="form-group">
                                         <label for="category_id">Kategori</label>
-                                        <select id="category_id" class="form-control" name="category_id">
+                                        <select id="category_id" class="form-control @error('category_id') is-invalid @enderror" name="category_id">
                                              <option value="{{ null }}">Pilih Kategori Destinasi</option>
                                              @foreach ($categories as $category)
                                                   <option value="{{ $category->id }}">{{ $category->name }}</option>
                                              @endforeach
                                         </select>
+                                        @error('category_id')
+                                             <span class="invalid-feedback" role="alert">
+                                                  <strong>{{ $message }}</strong>
+                                             </span>
+                                        @enderror
                                    </div>
 
                                    <div class="form-group">
@@ -47,7 +68,7 @@
 
                                    <div class="form-group">
                                         <label for="images">Gambar</label><br>
-                                        <img src="{{ asset('img/images/camera_360.png') }}" width="650px" height="520px" style="margin-bottom:8px;" id="images-field">
+                                        <img src="{{ asset('img/images/camera_360.png') }}" style="margin-bottom:8px;" id="panorama">
                                         <input id="images" class="form-control-file @error('name') is-invalid @enderror" type="file" name="images" onchange="preview(event)">
                                         @error('images')
                                              <span class="invalid-feedback" role="alert">
@@ -60,7 +81,7 @@
                                    <div class="form-group">
                                         <label class="control-label" for="richtextdescription">Keterangan</label>
                                         <textarea class="form-control richTextBox @error('name') is-invalid @enderror" name="description" id="richtextdescription">
-                                             
+                                             {{ old('description') }}
                                         </textarea>
                                         @error('description')
                                              <span class="invalid-feedback" role="alert">
@@ -78,11 +99,12 @@
      </div>
 @endsection
 
-@push('javascript')
+@section('javascript')
+     <script src="{{ asset('js/pannellum.min.js') }}"></script>
      <script>
           function preview(event) {
           let reader = new FileReader();
-          let imageField = document.querySelector('#images-field');
+          let imageField = document.querySelector('#panorama');
 
           reader.onload = function () {
                if (reader.readyState === 2) {
@@ -90,6 +112,7 @@
                }
           }
           reader.readAsDataURL(event.target.files[0]);
+
           }
      </script>
-@endpush
+@endsection
